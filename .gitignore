@@ -17,6 +17,9 @@ npm-debug.log*
 # macOS
 .DS_Store
 
+# playwright artefacts
+.playwright-mcp/
+
 # local documetation
 docs/
 

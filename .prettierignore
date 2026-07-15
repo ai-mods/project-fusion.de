@@ -2,6 +2,9 @@ dist/
 .astro/
 package-lock.json
 
+# local documentation & design prototypes, not website code
+docs/
+
 # agent/editor tooling, not website code
 .claude/
 CLAUDE.md

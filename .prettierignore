@@ -1,0 +1,7 @@
+dist/
+.astro/
+package-lock.json
+
+# agent/editor tooling, not website code
+.claude/
+CLAUDE.md

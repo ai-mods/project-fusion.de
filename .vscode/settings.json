@@ -1,0 +1,37 @@
+{
+  "peacock.color": "#FF8C00",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ffa333",
+    "activityBar.background": "#ffa333",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#008046",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#ffa333",
+    "statusBar.background": "#ff8c00",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#cc7000",
+    "statusBarItem.remoteBackground": "#ff8c00",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#ff8c00",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#ff8c0099",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.validate": ["javascript", "typescript", "astro"],
+  "js/ts.preferences.importModuleSpecifier": "relative",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.astro": true
+  }
+}

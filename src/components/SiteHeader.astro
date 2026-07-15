@@ -1,0 +1,312 @@
+---
+import { siteConfig } from "../config";
+import { homePath, otherLang, useTranslations, type Lang } from "../i18n/utils";
+import LogoFlame from "./LogoFlame.astro";
+import Wordmark from "./Wordmark.astro";
+import Button from "./Button.astro";
+import ArrowIcon from "./ArrowIcon.astro";
+
+interface Props {
+  lang: Lang;
+  /** Counterpart path in the other language; defaults to the one-pager mapping. */
+  alternatePath?: string;
+}
+
+const { lang, alternatePath } = Astro.props;
+const t = useTranslations(lang);
+
+// Anchor targets point at the home page so the nav also works from legal pages.
+const homePrefix = homePath(lang);
+const otherPath = alternatePath ?? homePath(otherLang(lang));
+---
+
+<header class="header">
+  <div class="inner">
+    <a class="brand" href={homePrefix}>
+      <LogoFlame size={24} />
+      <Wordmark />
+    </a>
+
+    <div class="right">
+      <nav class="nav">
+        <a href={`${homePrefix}#modules`}>{t("nav.modules")}</a>
+        <a href={`${homePrefix}#preview`}>{t("nav.preview")}</a>
+        <a href={`${homePrefix}#harness`}>{t("nav.harness")}</a>
+        <a href={`${homePrefix}#roadmap`}>{t("nav.roadmap")}</a>
+      </nav>
+
+      <Button
+        href={siteConfig.links.aiMods}
+        variant="accent-outline"
+        external
+        arrow
+      >
+        ai-mods.de
+      </Button>
+
+      <div class="lang">
+        {
+          lang === "en" ? (
+            <span class="lang-active">EN</span>
+          ) : (
+            <a class="lang-inactive" href={otherPath}>
+              EN
+            </a>
+          )
+        }
+        <span class="lang-sep">/</span>
+        {
+          lang === "de" ? (
+            <span class="lang-active">DE</span>
+          ) : (
+            <a class="lang-inactive" href={otherPath}>
+              DE
+            </a>
+          )
+        }
+      </div>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={t("a11y.menu")}
+      >
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-menu" hidden>
+    <a href={`${homePrefix}#modules`}>{t("nav.modules")}</a>
+    <a href={`${homePrefix}#preview`}>{t("nav.preview")}</a>
+    <a href={`${homePrefix}#harness`}>{t("nav.harness")}</a>
+    <a href={`${homePrefix}#roadmap`}>{t("nav.roadmap")}</a>
+    <a
+      class="ext"
+      href={siteConfig.links.aiMods}
+      target="_blank"
+      rel="noopener"
+    >
+      ai-mods.de
+      <ArrowIcon direction="up-right" size={11} />
+    </a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const menu = document.querySelector<HTMLElement>("#mobile-menu");
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.classList.toggle("open", open);
+      menu.hidden = !open;
+    };
+
+    toggle.addEventListener("click", () => setOpen(Boolean(menu.hidden)));
+
+    // A link click closes the menu; otherwise it covers the scroll target.
+    menu.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !menu.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 18px var(--pad-x);
+    border-bottom: var(--hairline);
+    background: var(--bg-header);
+    backdrop-filter: blur(8px);
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav a {
+    color: var(--text-soft);
+  }
+
+  .nav a:hover {
+    color: var(--acc);
+  }
+
+  .lang {
+    display: flex;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+  }
+
+  .lang-active {
+    color: var(--text);
+  }
+
+  .lang-sep,
+  .lang-inactive {
+    color: var(--text-ghost);
+  }
+
+  .lang-inactive:hover {
+    color: var(--acc);
+  }
+
+  /* Hamburger and menu panel exist only on mobile (≤900px). */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .bar {
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+  }
+
+  .menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: var(--hairline);
+  }
+
+  .mobile-menu a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 16px var(--pad-x);
+    border-top: var(--hairline-soft);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .mobile-menu a:hover {
+    color: var(--acc);
+  }
+
+  .mobile-menu .ext {
+    color: var(--acc);
+  }
+
+  /* Below this there is no room for the anchor nav; it moves into the
+     hamburger menu together with the ai-mods link, leaving logo, hamburger
+     and language switch visible (spec §9). 900px instead of 860px: the
+     larger wordmark lockup needs breathing room next to the nav. */
+  @media (max-width: 900px) {
+    .nav,
+    .right :global(.btn) {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .mobile-menu:not([hidden]) {
+      display: block;
+    }
+  }
+
+  /* On narrow phones, tighten the gaps and scale the brand lockup to 5/6
+     (flame 20px, wordmark 193.3px) so the header stays on one line next to
+     hamburger and language switch (no overflow/scrollbar at 375px). */
+  @media (max-width: 640px) {
+    .right {
+      gap: 14px;
+    }
+
+    .brand {
+      gap: 6px;
+    }
+
+    .brand :global(svg:first-child) {
+      width: 20px;
+      height: 20px;
+    }
+
+    .brand :global(svg:last-child) {
+      width: 193.3px;
+      height: 13.93px;
+    }
+
+    /* Show only the language you can switch to. */
+    .lang-active,
+    .lang-sep {
+      display: none;
+    }
+  }
+</style>

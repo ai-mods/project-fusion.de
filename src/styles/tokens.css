@@ -1,0 +1,44 @@
+:root {
+  /* Colors — backgrounds & surfaces */
+  --bg: #0d0c0b;
+  --bg-header: rgba(13, 12, 11, 0.92);
+  --surface-hover: #161514; /* = --bg + 4% --text, opaque (for the grid-gap technique, §6) */
+
+  /* Colors — text (opacity steps of body copy) */
+  --text: #f4f1ec;
+  --text-soft: rgba(244, 241, 236, 0.65);
+  --text-muted: rgba(244, 241, 236, 0.6);
+  --text-dim: rgba(244, 241, 236, 0.55);
+  --text-faint: rgba(244, 241, 236, 0.5);
+  --text-ghost: rgba(244, 241, 236, 0.4);
+
+  /* Colors — accent (brand orange) */
+  --acc: hsl(13, 80%, 60%);
+  --acc-light: hsl(22, 85%, 68%); /* second flame in the logo */
+  --acc-ink: #0d0c0b; /* text on accent surfaces */
+
+  /* Borders — hairlines instead of radii, no rounding (exception: to-top button) */
+  --hairline: 1px solid rgba(244, 241, 236, 0.2);
+  --hairline-soft: 1px solid rgba(244, 241, 236, 0.15);
+  --hairline-color: rgba(244, 241, 236, 0.2); /* for the grid-gap technique */
+  --border-btn: rgba(244, 241, 236, 0.35);
+  --border-img: rgba(244, 241, 236, 0.25);
+  --ink-divider: rgba(13, 12, 11, 0.3); /* dividers on accent surfaces */
+
+  /* Layout */
+  --maxw: 1180px;
+  --maxw-legal: 820px;
+  --pad-x: 36px;
+
+  /* Type */
+  --font-display: "Archivo Black", sans-serif;
+  --font-sans: "Archivo", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Tighter side padding on phones — every section inherits --pad-x (spec §9). */
+@media (max-width: 640px) {
+  :root {
+    --pad-x: 20px;
+  }
+}

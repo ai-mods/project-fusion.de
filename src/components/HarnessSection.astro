@@ -1,0 +1,114 @@
+---
+import { harness } from "../data/harness";
+import { useTranslations, type Lang } from "../i18n/utils";
+import Kicker from "./Kicker.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+/**
+ * "Agent Harness" section (§6.7): six building-block rows explaining the
+ * environment every agent runs in.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="harness" class="harness">
+  <div class="inner">
+    <Kicker>{t("harness.kicker")}</Kicker>
+    <SectionHeading
+      lines={[
+        { text: t("harness.h2a") },
+        { text: t("harness.h2b"), outline: true },
+      ]}
+    />
+    <p class="sub">{t("harness.sub")}</p>
+
+    <div class="rows">
+      {
+        harness.map((layer) => (
+          <div class="row">
+            <span class="number">{layer.number}</span>
+            <span class="title">{layer.title}</span>
+            <span class="desc">{layer.description[lang]}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .harness {
+    padding-inline: var(--pad-x);
+  }
+
+  .inner {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-block: 80px;
+  }
+
+  .harness :global(.kicker) {
+    margin-bottom: 16px;
+  }
+
+  .harness :global(.heading) {
+    margin-bottom: 12px;
+  }
+
+  .sub {
+    margin: 0 0 40px;
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 130px 340px 1fr;
+    gap: 28px;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: var(--hairline-soft);
+  }
+
+  .number {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 44px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--acc);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    text-transform: uppercase;
+  }
+
+  .desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 72px 1fr;
+    }
+
+    .number {
+      font-size: 32px;
+    }
+
+    .desc {
+      grid-column: 2;
+    }
+  }
+</style>

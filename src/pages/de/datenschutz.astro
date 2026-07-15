@@ -1,0 +1,88 @@
+---
+import { siteConfig } from "../../config";
+import LegalPage from "../../components/LegalPage.astro";
+import LegalSection from "../../components/LegalSection.astro";
+---
+
+<LegalPage lang="de" alternatePath="/privacy/">
+  <LegalSection number="01" title="Verantwortlicher">
+    <address>
+      Christian Perkuhn<br />
+      ai-mods<br />
+      Matterstockstraße 5<br />
+      97080 Würzburg<br />
+      Deutschland<br />
+      E-Mail: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+    </address>
+  </LegalSection>
+
+  <LegalSection number="02" title="Hosting">
+    <p>
+      Diese Website wird als statische Seite über GitHub Pages gehostet, einen
+      Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA
+      94107, USA. Beim Aufruf der Seiten verarbeitet GitHub technisch notwendige
+      Server-Logdaten: IP-Adresse, Zeitpunkt des Zugriffs, abgerufene Datei und
+      übermittelte Browser-Kennung (User-Agent).
+    </p>
+    <p>
+      Zweck dieser Verarbeitung ist der technische Betrieb, die Stabilität und
+      die Sicherheit der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
+      (berechtigtes Interesse an einer sicheren und funktionsfähigen
+      Bereitstellung). GitHub verarbeitet diese Daten teilweise auf Servern in
+      den USA. GitHub ist unter dem EU-US Data Privacy Framework zertifiziert;
+      die Übermittlung stützt sich damit auf den Angemessenheitsbeschluss der
+      EU-Kommission (Art. 45 DSGVO). Details in der
+      <a
+        href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
+        target="_blank"
+        rel="noopener">Datenschutzerklärung von GitHub</a
+      >.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="03" title="Keine Cookies, kein Tracking">
+    <p>
+      Diese Website setzt keine Cookies und bindet keine Analyse- oder
+      Tracking-Dienste ein. Es findet keine Reichweitenmessung und kein
+      Profiling statt. Über den vom Hoster verarbeiteten technischen Betrieb
+      hinaus werden keine Daten an Dritte übermittelt.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="04" title="Selbst gehostete Schriften">
+    <p>
+      Alle Schriftarten werden lokal von diesem Server ausgeliefert. Es besteht
+      keine Verbindung zu Google Fonts oder anderen Drittanbieter-Servern, es
+      werden dabei keine Daten an Dritte übertragen.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="05" title="Kontakt per E-Mail">
+    <p>
+      Nimmst du per E-Mail Kontakt auf, verarbeite ich die übermittelten Angaben
+      ausschließlich zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6
+      Abs. 1 lit. b DSGVO, wenn die Anfrage der Anbahnung eines Vertrags dient,
+      sonst Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald sie
+      nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten
+      entgegenstehen.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="06" title="Externe Links">
+    <p>
+      Diese Website verlinkt auf externe Angebote (ai-mods.de). Beim Anklicken
+      dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter,
+      auf deren Verarbeitung ich keinen Einfluss habe.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="07" title="Deine Rechte">
+    <p>
+      Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16),
+      Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
+      Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Zudem steht dir
+      ein Beschwerderecht bei einer Aufsichtsbehörde zu. Zuständig ist das
+      Bayerische Landesamt für Datenschutzaufsicht (BayLDA), Ansbach.
+    </p>
+  </LegalSection>
+</LegalPage>

@@ -1,0 +1,90 @@
+---
+import { providers } from "../data/providers";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+/**
+ * Accent band scrolling the provider names, hard-cut at content width. The
+ * track holds two identical copies and shifts by -50%, so the loop is seamless.
+ * Both copies are decorative (`aria-hidden`) — screen readers get the plain
+ * provider list via the visually hidden label instead of the ✦ glyphs.
+ * CSS-only, disabled under reduced motion (§6.2).
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const chain = providers.map((name) => `${name} ✦`).join(" ");
+const srLabel = `${t("a11y.providers")}: ${providers.join(", ")}`;
+---
+
+<div class="band">
+  <span class="sr-only">{srLabel}</span>
+  <div class="viewport" aria-hidden="true">
+    <div class="track">
+      <span class="chain">{chain}</span>
+      <span class="chain">{chain}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .band {
+    padding-inline: var(--pad-x);
+  }
+
+  /* Screen readers only: visually hidden but present in the accessibility tree. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Full bleed from the header breakpoint down, like ProductShot and StatBar. */
+  @media (max-width: 900px) {
+    .band {
+      padding-inline: 0;
+    }
+  }
+
+  .viewport {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    overflow: hidden;
+    background: var(--acc);
+    padding: 14px 0;
+  }
+
+  .track {
+    display: flex;
+    width: max-content;
+    animation: marquee 26s linear infinite;
+  }
+
+  .chain {
+    padding: 0 18px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    color: var(--acc-ink);
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+</style>

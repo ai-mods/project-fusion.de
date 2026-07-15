@@ -1,0 +1,137 @@
+---
+import { siteConfig } from "../config";
+import { useTranslations, type Lang } from "../i18n/utils";
+import Kicker from "./Kicker.astro";
+import Button from "./Button.astro";
+
+/**
+ * Above-the-fold hero. Owns the page's only `<h1>` (built locally at 112px —
+ * SectionHeading renders `<h2>`) and the 44px grid backdrop from §6.1.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero">
+  <div class="inner">
+    <Kicker dot>{t("hero.kicker")}</Kicker>
+
+    <h1 class="title">
+      {t("hero.line1")}<br />
+      {t("hero.line2")}<br />
+      <span class="outline">{t("hero.line3")}</span>
+    </h1>
+
+    <div class="row">
+      <p class="sub">{t("hero.sub")}</p>
+      <div class="actions">
+        <Button href="#modules" variant="filled-light">
+          {t("hero.ctaExplore")}
+        </Button>
+        <Button href={siteConfig.links.aiMods} variant="outline" external arrow>
+          ai-mods.de
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 80px var(--pad-x) 64px;
+  }
+
+  /* 44px grid backdrop (spec §6.1). The micro opacities are deliberately
+     hardcoded (the only allowed exception, §2). The horizontal inset cuts
+     the grid hard at the content column. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0 max(var(--pad-x), calc((100% - var(--maxw)) / 2));
+    background-image:
+      linear-gradient(rgba(244, 241, 236, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 236, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+  }
+
+  /* Horizontal inset so the content does not stick to the hard grid edge;
+     reduced on phones. */
+  .inner {
+    position: relative;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: 32px;
+  }
+
+  .hero :global(.kicker) {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    margin: 0 0 28px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(44px, 9.5vw, 112px);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .outline {
+    color: transparent;
+    -webkit-text-stroke: 2.5px var(--acc);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+
+  .sub {
+    margin: 0;
+    max-width: 460px;
+    /* 18px instead of 16px: the sub carries the hero alone since the stats
+       line was dropped. */
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .actions {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: 48px;
+    }
+
+    .inner {
+      padding-inline: 0px;
+    }
+
+    .outline {
+      -webkit-text-stroke-width: 2px;
+    }
+  }
+</style>

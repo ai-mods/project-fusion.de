@@ -1,0 +1,35 @@
+---
+/**
+ * Mono label line. Default `///` prefix; the hero variant (`dot`) uses a `●`
+ * marker with slightly tighter tracking. Label content comes via slot.
+ */
+interface Props {
+  dot?: boolean;
+}
+
+const { dot = false } = Astro.props;
+---
+
+<div class:list={["kicker", { dot }]}>
+  <span class="mark" aria-hidden="true">{dot ? "●" : "///"}</span>
+  <slot />
+</div>
+
+<style>
+  .kicker {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--acc);
+  }
+
+  /* Flex centers the ● marker vertically on the text line instead of the
+     baseline; gap instead of a space character for a defined distance. */
+  .kicker.dot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.14em;
+  }
+</style>

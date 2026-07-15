@@ -1,0 +1,82 @@
+---
+/**
+ * One numbered legal section row (§8): outline number left, heading + body
+ * right. `title` arrives already resolved to the active language; the slot
+ * carries the section body as prose (paragraphs, address, links).
+ */
+interface Props {
+  number: string;
+  title: string;
+}
+
+const { number, title } = Astro.props;
+---
+
+<div class="section">
+  <span class="number" aria-hidden="true">{number}</span>
+  <div class="body">
+    <h2 class="title">{title}</h2>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .section {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: var(--hairline-soft);
+  }
+
+  .number {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--acc);
+  }
+
+  .title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  /* Prose arrives through the slot from the pages, hence :global. */
+  .body :global(p),
+  .body :global(address) {
+    margin: 0 0 12px;
+    font-style: normal;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .body :global(p:last-child),
+  .body :global(address:last-child) {
+    margin-bottom: 0;
+  }
+
+  .body :global(a) {
+    color: var(--acc);
+  }
+
+  .body :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  /* Spec §9: narrower number column, smaller digit; stroke stays 1.5px. */
+  @media (max-width: 640px) {
+    .section {
+      grid-template-columns: 48px 1fr;
+    }
+
+    .number {
+      font-size: 20px;
+    }
+  }
+</style>

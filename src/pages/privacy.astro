@@ -1,0 +1,108 @@
+---
+import { siteConfig } from "../config";
+import LegalPage from "../components/LegalPage.astro";
+import LegalSection from "../components/LegalSection.astro";
+---
+
+<LegalPage lang="en" alternatePath="/de/datenschutz/">
+  <p class="note">
+    Courtesy translation of the German
+    <a href="/de/datenschutz/">Datenschutzerklärung</a>, which is the legally
+    binding version.
+  </p>
+
+  <LegalSection number="01" title="Controller">
+    <address>
+      Christian Perkuhn<br />
+      ai-mods<br />
+      Matterstockstraße 5<br />
+      97080 Würzburg<br />
+      Germany<br />
+      Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+    </address>
+  </LegalSection>
+
+  <LegalSection number="02" title="Hosting">
+    <p>
+      This website is hosted as a static site on GitHub Pages, a service of
+      GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
+      When the pages are requested, GitHub processes technically necessary
+      server log data: IP address, time of access, requested file and the
+      transmitted browser identifier (user agent).
+    </p>
+    <p>
+      The purpose of this processing is the technical operation, stability and
+      security of the website. The legal basis is Art. 6 (1) (f) GDPR
+      (legitimate interest in a secure and functional service). GitHub processes
+      this data partly on servers in the United States. GitHub is certified
+      under the EU-US Data Privacy Framework, so the transfer is based on the
+      adequacy decision of the European Commission (Art. 45 GDPR). See the
+      <a
+        href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
+        target="_blank"
+        rel="noopener">GitHub Privacy Statement</a
+      > for details.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="03" title="No cookies, no tracking">
+    <p>
+      This website sets no cookies and embeds no analytics or tracking services.
+      There is no audience measurement and no profiling. Beyond the technical
+      operation handled by the host, no data is transferred to third parties.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="04" title="Self-hosted fonts">
+    <p>
+      All fonts are served locally from this server. There is no connection to
+      Google Fonts or other third-party servers, and no data is transferred to
+      third parties in the process.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="05" title="Contact by email">
+    <p>
+      If you contact me by email, I process the details you send solely to
+      handle your request. The legal basis is Art. 6 (1) (b) GDPR where the
+      request concerns the initiation of a contract, otherwise Art. 6 (1) (f)
+      GDPR. The data is deleted once it is no longer required and no statutory
+      retention obligations prevent this.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="06" title="External links">
+    <p>
+      This website links to external services (ai-mods.de). When you follow
+      these links, the privacy policies of the respective providers apply, over
+      whose processing I have no influence.
+    </p>
+  </LegalSection>
+
+  <LegalSection number="07" title="Your rights">
+    <p>
+      You have the right to access (Art. 15 GDPR), rectification (Art. 16),
+      erasure (Art. 17), restriction of processing (Art. 18), data portability
+      (Art. 20) and objection (Art. 21). You also have the right to lodge a
+      complaint with a supervisory authority. The competent authority is the
+      Bavarian State Office for Data Protection Supervision (BayLDA), Ansbach.
+    </p>
+  </LegalSection>
+</LegalPage>
+
+<style>
+  .note {
+    margin: 0 0 32px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .note a {
+    color: var(--acc);
+  }
+
+  .note a:hover {
+    text-decoration: underline;
+  }
+</style>

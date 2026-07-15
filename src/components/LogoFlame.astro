@@ -1,10 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+---
+/**
+ * Brand flame mark. Fills use tokens so it recolors with the theme; the favicon
+ * keeps literal colors for standalone rendering. Paths mirror `public/favicon.svg`.
+ */
+interface Props {
+  size?: number;
+}
+
+const { size = 24 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 512 512" aria-hidden="true">
   <path
-    fill="hsl(13, 80%, 60%)"
+    fill="var(--acc)"
     d="M260.3,6.5c-6.7,15.4-9.9,31.7-17,47.1-40,89.9-170.7,145.3-179,246.3-7.1,87.1,54.7,166.7,137.4,189.3-3.6-9.5-9.5-18.6-12.7-28.1-48.7-148.9,135.1-185.3,147.3-303.4,4.4-40-5.9-75.6-28.9-108.1-5.9-8.3-38-45.5-47.1-43.6h0v.4Z"
-  />
+  ></path>
   <path
-    fill="hsl(22, 85%, 68%)"
+    fill="var(--acc-light)"
     d="M376.4,141.9c.8,32.9-10.3,65.7-27.7,93.1-49.5,76.8-164.8,124.8-122,238,19,50.3,50.3,33.3,87.1,13.1,129.1-70.5,186.9-217.8,74.9-335.1-1.6-2-9.9-11.5-12.3-8.7h0v-.4Z"
-  />
+  ></path>
 </svg>

@@ -1,0 +1,36 @@
+---
+import { homePath, useTranslations, type Lang } from "../i18n/utils";
+import ArrowIcon from "./ArrowIcon.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const homePrefix = homePath(lang);
+---
+
+<a class="back" href={homePrefix}>
+  <ArrowIcon direction="left" size={12} />
+  {t("legal.back")}
+</a>
+
+<style>
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 36px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  .back:hover {
+    color: var(--acc);
+  }
+</style>

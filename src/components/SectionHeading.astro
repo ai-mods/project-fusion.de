@@ -1,0 +1,66 @@
+---
+/**
+ * Section headline (`<h2>`). Any line can render as outline (stroke) text — the
+ * brand's signature treatment. Stroke width tracks the size: 2px at the default
+ * 64px, 2.5px at the 88px CTA size, each one step thinner below 640px (§9).
+ */
+interface Props {
+  lines: { text: string; outline?: boolean }[];
+  size?: "default" | "cta";
+}
+
+const { lines, size = "default" } = Astro.props;
+---
+
+<h2 class:list={["heading", size]}>
+  {
+    lines.map((line, i) => (
+      <>
+        {i > 0 && <br />}
+        {line.outline ? <span class="outline">{line.text}</span> : line.text}
+      </>
+    ))
+  }
+</h2>
+
+<style>
+  .heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .default {
+    font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 1;
+  }
+
+  .cta {
+    font-size: clamp(40px, 7.5vw, 88px);
+    line-height: 0.95;
+  }
+
+  .outline {
+    color: transparent;
+  }
+
+  .default .outline {
+    -webkit-text-stroke: 2px var(--acc);
+  }
+
+  .cta .outline {
+    -webkit-text-stroke: 2.5px var(--acc);
+  }
+
+  /* Outline one step thinner on phones (spec §9). */
+  @media (max-width: 640px) {
+    .default .outline {
+      -webkit-text-stroke-width: 1.5px;
+    }
+
+    .cta .outline {
+      -webkit-text-stroke-width: 2px;
+    }
+  }
+</style>

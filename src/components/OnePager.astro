@@ -1,0 +1,42 @@
+---
+import { type Lang } from "../i18n/utils";
+import SiteHeader from "./SiteHeader.astro";
+import Hero from "./Hero.astro";
+import Marquee from "./Marquee.astro";
+import ProductShot from "./ProductShot.astro";
+import StatBar from "./StatBar.astro";
+import ModulesSection from "./ModulesSection.astro";
+import PreviewSection from "./PreviewSection.astro";
+import HarnessSection from "./HarnessSection.astro";
+import RoadmapSection from "./RoadmapSection.astro";
+import CtaSection from "./CtaSection.astro";
+import ToTopButton from "./ToTopButton.astro";
+import SiteFooter from "./SiteFooter.astro";
+
+/**
+ * Landing page composition (ai-mods pattern). Header, all sections top→bottom,
+ * ToTopButton as the last child of `<main>`, footer outside.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<SiteHeader lang={lang} />
+
+<main>
+  <Hero lang={lang} />
+  <Marquee lang={lang} />
+  <ProductShot lang={lang} />
+  <StatBar lang={lang} />
+  <ModulesSection lang={lang} />
+  <PreviewSection lang={lang} />
+  <HarnessSection lang={lang} />
+  <RoadmapSection lang={lang} />
+  <CtaSection lang={lang} />
+  <ToTopButton lang={lang} />
+</main>
+
+<SiteFooter lang={lang} />

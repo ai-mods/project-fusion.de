@@ -1,0 +1,110 @@
+---
+import { roadmap } from "../data/roadmap";
+import { useTranslations, type Lang } from "../i18n/utils";
+import Kicker from "./Kicker.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+/**
+ * "Roadmap" section (§6.8): kicker, heading, and a sub that frames the
+ * milestones as indicative, followed by the milestone rows.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="roadmap" class="roadmap">
+  <div class="inner">
+    <Kicker>{t("roadmap.kicker")}</Kicker>
+    <SectionHeading
+      lines={[
+        { text: t("roadmap.h2a") },
+        { text: t("roadmap.h2b"), outline: true },
+      ]}
+    />
+    <p class="sub">{t("roadmap.sub")}</p>
+
+    <div class="rows">
+      {
+        roadmap.map((milestone) => (
+          <div class="row">
+            <span class="quarter">{milestone.quarter}</span>
+            <span class="title">{milestone.title[lang]}</span>
+            <span class="desc">{milestone.description[lang]}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .roadmap {
+    padding-inline: var(--pad-x);
+  }
+
+  .inner {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-block: 80px;
+  }
+
+  .roadmap :global(.kicker) {
+    margin-bottom: 16px;
+  }
+
+  .roadmap :global(.heading) {
+    margin-bottom: 12px;
+  }
+
+  .sub {
+    margin: 0 0 40px;
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 160px 300px 1fr;
+    gap: 28px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: var(--hairline-soft);
+  }
+
+  .quarter {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--acc);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+
+  .desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 110px 1fr;
+    }
+
+    .desc {
+      grid-column: 2;
+    }
+  }
+</style>

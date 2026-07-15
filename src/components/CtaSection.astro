@@ -1,0 +1,75 @@
+---
+import { siteConfig } from "../config";
+import { useTranslations, type Lang } from "../i18n/utils";
+import SectionHeading from "./SectionHeading.astro";
+import Button from "./Button.astro";
+
+/**
+ * Closing call-to-action (§6.9). The availability line keeps a single source of
+ * truth: label text from i18n, the date value from config (§0 D2).
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const availability = t("cta.availability").replace(
+  "{value}",
+  siteConfig.availableFrom,
+);
+---
+
+<section class="cta">
+  <div class="inner">
+    <SectionHeading
+      size="cta"
+      lines={[{ text: t("cta.h2a") }, { text: t("cta.h2b"), outline: true }]}
+    />
+    <p class="sub">{t("cta.sub")}</p>
+    <Button
+      href={siteConfig.links.aiMods}
+      variant="accent-filled"
+      external
+      arrow
+    >
+      ai-mods.de
+    </Button>
+    <div class="availability">{availability}</div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-inline: var(--pad-x);
+    text-align: center;
+  }
+
+  .inner {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-block: 100px;
+  }
+
+  .cta :global(.heading) {
+    margin-bottom: 24px;
+  }
+
+  .sub {
+    margin: 0 auto 32px;
+    max-width: 460px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .availability {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-ghost);
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+import { stats } from "../data/stats";
+import type { Lang } from "../i18n/utils";
+
+/**
+ * Inverted key-figures bar: accent background, ink text (§6.4). Accent block
+ * hard-cut at content width (`--maxw`); dividers via cell `border-right`.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="bar">
+  <div class="inner">
+    {
+      stats.map((stat) => (
+        <div class="cell">
+          <div class="value">{stat.value}</div>
+          <div class="label">{stat.label[lang]}</div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .bar {
+    padding-inline: var(--pad-x);
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: var(--maxw);
+    margin-inline: auto;
+    background: var(--acc);
+    color: var(--acc-ink);
+  }
+
+  .cell {
+    padding: 36px 28px;
+    border-right: 1px solid var(--ink-divider);
+  }
+
+  .cell:last-child {
+    border-right: none;
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+  }
+
+  .label {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 860px) {
+    .inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 2×2: right column without divider, top row with a bottom line. */
+    .cell:nth-child(2n) {
+      border-right: none;
+    }
+
+    .cell:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--ink-divider);
+    }
+  }
+
+  /* Full bleed from the header breakpoint down, like Marquee and ProductShot. */
+  @media (max-width: 900px) {
+    .bar {
+      padding-inline: 0;
+    }
+  }
+
+  /* More compact on phones so the block does not dominate. */
+  @media (max-width: 640px) {
+    .cell {
+      padding: 22px 18px;
+    }
+
+    .value {
+      font-size: 30px;
+    }
+  }
+</style>

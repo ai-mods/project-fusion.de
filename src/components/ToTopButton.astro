@@ -1,0 +1,95 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+import ArrowIcon from "./ArrowIcon.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+{
+  /*
+  Last child of <main>: the sticky wrapper pins the button to the bottom
+  viewport edge but can never leave <main>, so it always stops above the
+  footer instead of covering it.
+*/
+}
+<div class="wrap">
+  <button class="totop" aria-label={t("a11y.toTop")}>
+    <ArrowIcon direction="up" size={16} />
+  </button>
+</div>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(".totop");
+
+  if (button) {
+    const toggle = () =>
+      button.classList.toggle("visible", window.scrollY > 400);
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+
+    button.addEventListener("click", () =>
+      window.scrollTo({
+        top: 0,
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      }),
+    );
+  }
+</script>
+
+<style>
+  .wrap {
+    position: sticky;
+    bottom: 4px;
+    z-index: 40;
+    height: 0;
+    overflow: visible;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 28px;
+    pointer-events: none;
+  }
+
+  .totop {
+    pointer-events: auto;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* The only round element on the site (spec §2/§3). */
+    border-radius: 50%;
+    border: 2px solid var(--acc);
+    background: var(--bg);
+    color: var(--acc);
+    cursor: pointer;
+    /* Lifted 24px above the wrapper's zero-height line: while scrolling the
+       button floats at 4px + 24px = 28px, and at the page end 24px of air
+       remain above the footer instead of contact. */
+    transform: translateY(calc(-100% - 24px));
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 150ms ease,
+      visibility 150ms ease,
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .totop.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .totop:hover {
+    background: var(--acc);
+    color: var(--acc-ink);
+  }
+</style>

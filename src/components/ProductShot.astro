@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import bridgeShot from "../assets/screenshots/bridge.png";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+/**
+ * Product screenshot below the hero, constrained to content width. Rendered
+ * at natural aspect ratio (no crop); eager because it sits just under the
+ * fold (§6.3).
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const alt = t("a11y.screenshotAlt").replace("{tab}", "Bridge");
+---
+
+<div class="shot">
+  <Image
+    src={bridgeShot}
+    alt={alt}
+    widths={[768, 1180, 1760, 2360]}
+    sizes="(min-width: 1252px) 1180px, 100vw"
+    loading="eager"
+  />
+</div>
+
+<style>
+  .shot {
+    padding-inline: var(--pad-x);
+  }
+
+  /* Full bleed from the header breakpoint down; the narrow width needs every pixel. */
+  @media (max-width: 900px) {
+    .shot {
+      padding-inline: 0;
+    }
+  }
+
+  .shot :global(img) {
+    display: block;
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    height: auto;
+  }
+</style>

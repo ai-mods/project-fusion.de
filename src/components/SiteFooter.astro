@@ -1,0 +1,68 @@
+---
+import { siteConfig } from "../config";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Privacy is an internal, language-specific route; the imprint is the one on
+// ai-mods.de (D4), linked directly in the footer to satisfy the German
+// requirement of being easily recognizable and directly reachable.
+const privacyPath = lang === "de" ? "/de/datenschutz/" : "/privacy/";
+const imprintUrl = siteConfig.links.aiModsImprint[lang];
+---
+
+<footer class="footer">
+  <div class="inner">
+    <span>
+      {t("footer.copyright")}<span class="suffix"
+        >{t("footer.copyrightSuffix")}</span
+      >
+    </span>
+    <div class="links">
+      <a href={privacyPath}>{t("footer.privacy")}</a>
+      <a href={imprintUrl} target="_blank" rel="noopener">
+        {t("footer.imprint")}
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 20px var(--pad-x);
+    border-top: var(--hairline);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-ghost);
+  }
+
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+
+  .links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .links a:hover {
+    color: var(--acc);
+  }
+
+  /* Phones show only "© 2026 AI-MODS"; the project name is too much there. */
+  @media (max-width: 640px) {
+    .suffix {
+      display: none;
+    }
+  }
+</style>

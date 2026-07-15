@@ -1,0 +1,40 @@
+---
+import { siteConfig } from "../config";
+import LegalPage from "../components/LegalPage.astro";
+import LegalSection from "../components/LegalSection.astro";
+---
+
+<LegalPage
+  lang="en"
+  alternatePath="/de/impressum/"
+  title="Imprint — Project Fusion"
+  description="Legal notice for project-fusion.de: Christian Perkuhn, ai-mods, Würzburg, Germany."
+  h1a=""
+  h1b="Imprint"
+>
+  <p class="note">
+    Courtesy translation of the German{" "}
+    <a href="/de/impressum/">Impressum</a>, which is the legally binding
+    version.
+  </p>
+
+  <LegalSection number="01" title="Information pursuant to § 5 DDG">
+    <address>
+      Christian Perkuhn<br />
+      ai-mods<br />
+      Matterstockstraße 5<br />
+      97080 Würzburg<br />
+      Germany
+    </address>
+  </LegalSection>
+
+  <LegalSection number="02" title="Contact">
+    <p>
+      Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+    </p>
+  </LegalSection>
+
+  <LegalSection number="03" title="Responsible for content under § 18 (2) MStV">
+    <p>Christian Perkuhn (address as above)</p>
+  </LegalSection>
+</LegalPage>

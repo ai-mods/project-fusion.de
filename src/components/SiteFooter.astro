@@ -1,5 +1,4 @@
 ---
-import { siteConfig } from "../config";
 import { useTranslations, type Lang } from "../i18n/utils";
 
 interface Props {
@@ -9,11 +8,10 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// Privacy is an internal, language-specific route; the imprint is the one on
-// ai-mods.de (D4), linked directly in the footer to satisfy the German
-// requirement of being easily recognizable and directly reachable.
+// Language-specific legal routes, linked directly in the footer so the
+// imprint is easily recognizable and directly reachable (German § 5 DDG).
 const privacyPath = lang === "de" ? "/de/datenschutz/" : "/privacy/";
-const imprintUrl = siteConfig.links.aiModsImprint[lang];
+const imprintPath = lang === "de" ? "/de/impressum/" : "/imprint/";
 ---
 
 <footer class="footer">
@@ -25,9 +23,7 @@ const imprintUrl = siteConfig.links.aiModsImprint[lang];
     </span>
     <div class="links">
       <a href={privacyPath}>{t("footer.privacy")}</a>
-      <a href={imprintUrl} target="_blank" rel="noopener">
-        {t("footer.imprint")}
-      </a>
+      <a href={imprintPath}>{t("footer.imprint")}</a>
     </div>
   </div>
 </footer>

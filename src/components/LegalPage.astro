@@ -8,21 +8,25 @@ import Kicker from "./Kicker.astro";
 import ToTopButton from "./ToTopButton.astro";
 
 /**
- * Privacy-policy page shell (§8): chrome (header, kicker, H1, updated line,
- * footer) around the language-specific sections, which the route files pass
- * in via the slot. `alternatePath` wires canonical/hreflang and the language
- * switch to the counterpart route in the other language.
+ * Legal page shell (§8): chrome (header, kicker, H1, updated line, footer)
+ * around the language-specific sections, which the route files pass in via
+ * the slot. Title, description and H1 arrive already localized from the
+ * calling page (privacy or imprint); `alternatePath` wires canonical/hreflang
+ * and the language switch to the counterpart route in the other language.
  */
 interface Props {
   lang: Lang;
   alternatePath: string;
+  title: string;
+  description: string;
+  /** First H1 part, rendered plain; may be empty for single-word headings. */
+  h1a: string;
+  /** Second H1 part, rendered as outline stroke. */
+  h1b: string;
 }
 
-const { lang, alternatePath } = Astro.props;
+const { lang, alternatePath, title, description, h1a, h1b } = Astro.props;
 const t = useTranslations(lang);
-
-const title = t("legal.title");
-const description = t("legal.description");
 ---
 
 <BaseLayout
@@ -41,10 +45,10 @@ const description = t("legal.description");
 
       {
         /* No space before the span: DE breaks after the hyphen
-           ("DATENSCHUTZ-ERKLÄRUNG"), EN carries the space in the key. */
+           ("DATENSCHUTZ-ERKLÄRUNG"), EN carries the space in `h1b`. */
       }
       <h1 class="title">
-        {t("legal.h1a")}<span class="outline">{t("legal.h1b")}</span>
+        {h1a}<span class="outline">{h1b}</span>
       </h1>
 
       <div class="updated">{t("legal.updated")}</div>
@@ -93,6 +97,22 @@ const description = t("legal.description");
     font-size: 11px;
     letter-spacing: 0.1em;
     color: var(--text-ghost);
+  }
+
+  /* Courtesy-translation note on the EN pages; slotted, hence :global. */
+  .legal :global(.note) {
+    margin: 0 0 32px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .legal :global(.note a) {
+    color: var(--acc);
+  }
+
+  .legal :global(.note a:hover) {
+    text-decoration: underline;
   }
 
   /* Spec §9: large H1 stroke one step thinner below 640px (2 → 1.5). */

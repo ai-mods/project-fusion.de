@@ -4,7 +4,14 @@ import LegalPage from "../components/LegalPage.astro";
 import LegalSection from "../components/LegalSection.astro";
 ---
 
-<LegalPage lang="en" alternatePath="/de/datenschutz/">
+<LegalPage
+  lang="en"
+  alternatePath="/de/datenschutz/"
+  title="Privacy Policy — Project Fusion"
+  description="Privacy policy for project-fusion.de: hosting on GitHub Pages, no cookies, no tracking, and your rights."
+  h1a="Privacy"
+  h1b=" Policy"
+>
   <p class="note">
     Courtesy translation of the German{" "}
     <a href="/de/datenschutz/">Datenschutzerklärung</a>, which is the legally
@@ -89,20 +96,3 @@ import LegalSection from "../components/LegalSection.astro";
     </p>
   </LegalSection>
 </LegalPage>
-
-<style>
-  .note {
-    margin: 0 0 32px;
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--text-dim);
-  }
-
-  .note a {
-    color: var(--acc);
-  }
-
-  .note a:hover {
-    text-decoration: underline;
-  }
-</style>

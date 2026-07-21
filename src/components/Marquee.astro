@@ -45,13 +45,6 @@ const srLabel = `${t("a11y.providers")}: ${providers.join(", ")}`;
     white-space: nowrap;
   }
 
-  /* Full bleed from the header breakpoint down, like ProductShot and StatBar. */
-  @media (max-width: 900px) {
-    .band {
-      padding-inline: 0;
-    }
-  }
-
   .viewport {
     max-width: var(--maxw);
     margin-inline: auto;
@@ -74,6 +67,18 @@ const srLabel = `${t("a11y.providers")}: ${providers.join(", ")}`;
     letter-spacing: 0.1em;
     white-space: nowrap;
     color: var(--acc-ink);
+  }
+
+  /* Full bleed from the laptop breakpoint (1200px) down, like ProductShot
+     and StatBar. */
+  @media (max-width: 1200px) {
+    .band {
+      padding-inline: 0;
+    }
+
+    .viewport {
+      max-width: 100%;
+    }
   }
 
   @keyframes marquee {

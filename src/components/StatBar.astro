@@ -80,10 +80,15 @@ const { lang } = Astro.props;
     }
   }
 
-  /* Full bleed from the header breakpoint down, like Marquee and ProductShot. */
-  @media (max-width: 900px) {
+  /* Full bleed from the laptop breakpoint (1200px) down, like Marquee and
+     ProductShot. */
+  @media (max-width: 1200px) {
     .bar {
       padding-inline: 0;
+    }
+
+    .inner {
+      max-width: 100%;
     }
   }
 

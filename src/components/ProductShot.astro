@@ -33,18 +33,23 @@ const alt = t("a11y.screenshotAlt").replace("{tab}", "Bridge");
     padding-inline: var(--pad-x);
   }
 
-  /* Full bleed from the header breakpoint down; the narrow width needs every pixel. */
-  @media (max-width: 900px) {
-    .shot {
-      padding-inline: 0;
-    }
-  }
-
   .shot :global(img) {
     display: block;
     width: 100%;
     max-width: var(--maxw);
     margin-inline: auto;
     height: auto;
+  }
+
+  /* Full bleed from the laptop breakpoint (1200px) down; the narrow width
+     needs every pixel. */
+  @media (max-width: 1200px) {
+    .shot {
+      padding-inline: 0;
+    }
+
+    .shot :global(img) {
+      max-width: 100%;
+    }
   }
 </style>

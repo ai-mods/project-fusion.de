@@ -43,7 +43,18 @@ const t = useTranslations(lang);
 <style>
   .hero {
     position: relative;
-    padding: 80px var(--pad-x) 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Header (76px) + hero + marquee (46px) fill the visible viewport, so
+       the marquee closes the fold. Capped at a 750px viewport: on taller
+       screens the hero stops growing and the ProductShot peeks in instead.
+       svh instead of vh: iOS counts the area behind Safari's toolbars into
+       vh, which would push the fold too far down. The paddings remain as a
+       squeeze guard on short viewports. */
+    min-height: calc(min(100vh, 750px) - 122px);
+    min-height: calc(min(100svh, 750px) - 122px);
+    padding: 48px var(--pad-x) 48px;
   }
 
   /* 44px grid backdrop (spec §6.1). The micro opacities are deliberately
@@ -122,10 +133,6 @@ const t = useTranslations(lang);
   }
 
   @media (max-width: 640px) {
-    .hero {
-      padding-top: 48px;
-    }
-
     .inner {
       padding-inline: 0px;
     }

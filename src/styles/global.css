@@ -36,9 +36,11 @@ a {
   text-decoration: none;
 }
 
-/* Offset the sticky header so anchor targets do not disappear under it. */
+/* Anchor landing: 76px sticky header + 36px gap to the kicker. Sections
+   bring 80px own padding-top, so 76 + 36 - 80 = 32px. PreviewSection
+   (40px padding-top) overrides this locally to 72px. */
 section[id] {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 32px;
 }
 
 :focus-visible {

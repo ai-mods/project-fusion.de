@@ -110,6 +110,9 @@ const t = useTranslations(lang);
 <style>
   .preview {
     padding: 40px var(--pad-x) 80px;
+    /* 40px padding-top instead of the usual 80px, so the global 32px
+       anchor offset lands 40px too high here — compensate (see global.css). */
+    scroll-margin-top: 72px;
     text-align: center;
   }
 

@@ -68,6 +68,9 @@ const t = useTranslations(lang);
       linear-gradient(rgba(244, 241, 236, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(244, 241, 236, 0.04) 1px, transparent 1px);
     background-size: 44px 44px;
+    /* Center the tile pattern so the cut-off cells split evenly between the
+       left and right edge (the column width is no multiple of 44px). */
+    background-position: top center;
     pointer-events: none;
   }
 

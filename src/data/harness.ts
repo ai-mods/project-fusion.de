@@ -3,7 +3,7 @@ import type { LocalizedText } from "./types";
 /** A single building block row in the "Agent Harness" section (§6.7). */
 export interface HarnessLayer {
   number: string;
-  /** Layer name — identical in both languages, therefore a plain string. */
+  /** Layer name, identical in both languages, therefore a plain string. */
   title: string;
   description: LocalizedText;
 }
@@ -14,8 +14,8 @@ export const harness: HarnessLayer[] = [
     number: "01",
     title: "Isolated Sandbox",
     description: {
-      en: "Every agent runs in its own contained environment — nothing leaks out.",
-      de: "Jeder Agent läuft in seiner eigenen, abgeschotteten Umgebung — nichts dringt nach außen.",
+      en: "Every agent runs in its own contained environment. Nothing leaks out.",
+      de: "Jeder Agent läuft in seiner eigenen, abgeschotteten Umgebung. Nichts dringt nach außen.",
     },
   },
   {
@@ -46,8 +46,8 @@ export const harness: HarnessLayer[] = [
     number: "05",
     title: "Networking",
     description: {
-      en: "Controlled outbound access — APIs, web, services.",
-      de: "Kontrollierter Zugriff nach außen — APIs, Web, Services.",
+      en: "Controlled outbound access: APIs, web, services.",
+      de: "Kontrollierter Zugriff nach außen: APIs, Web, Services.",
     },
   },
   {

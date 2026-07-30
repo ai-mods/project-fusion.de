@@ -3,7 +3,6 @@ import bridgeShot from "../assets/screenshots/bridge.png";
 import courierShot from "../assets/screenshots/courier.png";
 import memoryShot from "../assets/screenshots/memory.png";
 import plannerShot from "../assets/screenshots/planner.png";
-import scoutShot from "../assets/screenshots/scout.png";
 import skillsShot from "../assets/screenshots/skills.png";
 import trackerShot from "../assets/screenshots/tracker.png";
 
@@ -11,7 +10,7 @@ import trackerShot from "../assets/screenshots/tracker.png";
 export interface Tab {
   /** Lowercase id, matches the screenshot filename. */
   id: string;
-  /** Uppercase label — identical in both languages, therefore a plain string. */
+  /** Uppercase label, identical in both languages, therefore a plain string. */
   label: string;
   image: ImageMetadata;
 }
@@ -23,7 +22,6 @@ export const tabs: Tab[] = [
   { id: "courier", label: "COURIER", image: courierShot },
   { id: "memory", label: "MEMORY", image: memoryShot },
   { id: "planner", label: "PLANNER", image: plannerShot },
-  { id: "scout", label: "SCOUT", image: scoutShot },
   { id: "skills", label: "SKILLS", image: skillsShot },
   { id: "tracker", label: "TRACKER", image: trackerShot },
 ];

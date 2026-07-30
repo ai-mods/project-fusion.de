@@ -3,12 +3,11 @@ import { Image } from "astro:assets";
 import { tabs } from "../data/tabs";
 import { useTranslations, type Lang } from "../i18n/utils";
 import Kicker from "./Kicker.astro";
+import SectionHeading from "./SectionHeading.astro";
 
 /**
- * "App Preview" tab switcher (§6.6). Eight screenshot tabs; a small vanilla
+ * "App Preview" tab switcher (§6.6). Seven screenshot tabs; a small vanilla
  * script (no framework) drives selection, roving tabindex and arrow-key nav.
- * The H2 is local because its outline word sits inline (SectionHeading breaks
- * each line), not on its own line.
  */
 interface Props {
   lang: Lang;
@@ -21,11 +20,12 @@ const t = useTranslations(lang);
 <section id="preview" class="preview">
   <div class="inner">
     <Kicker>{t("preview.kicker")}</Kicker>
-    <h2 class="heading">
-      {/* Explicit space: Astro trims the line break before the span. */}
-      {t("preview.h2a")}{" "}
-      <span class="outline">{t("preview.h2b")}</span>
-    </h2>
+    <SectionHeading
+      lines={[
+        { text: t("preview.h2a") },
+        { text: t("preview.h2b"), outline: true },
+      ]}
+    />
     <p class="sub">{t("preview.sub")}</p>
 
     <div class="tablist" role="tablist" aria-label={t("preview.kicker")}>
@@ -111,7 +111,7 @@ const t = useTranslations(lang);
   .preview {
     padding: 40px var(--pad-x) 80px;
     /* 40px padding-top instead of the usual 80px, so the global 32px
-       anchor offset lands 40px too high here — compensate (see global.css). */
+       anchor offset lands 40px too high here, compensate (see global.css). */
     scroll-margin-top: 72px;
     text-align: center;
   }
@@ -125,23 +125,16 @@ const t = useTranslations(lang);
     margin-bottom: 16px;
   }
 
-  .heading {
-    margin: 0 0 32px;
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(36px, 5.5vw, 64px);
-    line-height: 1;
-    text-transform: uppercase;
+  .preview :global(.heading) {
+    margin-bottom: 32px;
   }
 
-  .outline {
-    color: transparent;
-    -webkit-text-stroke: 2px var(--acc);
-  }
-
+  /* Same measure and balanced rag as the CTA sub: at 460px the centred text
+     read as a narrow column with an orphan word on the last line. */
   .sub {
     margin: 0 auto 32px;
-    max-width: 460px;
+    max-width: 700px;
+    text-wrap: balance;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-dim);
@@ -185,11 +178,5 @@ const t = useTranslations(lang);
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  @media (max-width: 640px) {
-    .outline {
-      -webkit-text-stroke-width: 1.5px;
-    }
   }
 </style>

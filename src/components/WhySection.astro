@@ -1,0 +1,109 @@
+---
+import { facts } from "../data/facts";
+import { useTranslations, type Lang } from "../i18n/utils";
+import Kicker from "./Kicker.astro";
+import SectionHeading from "./SectionHeading.astro";
+
+/**
+ * "Why I build this" section: two prose paragraphs that frame the project as a
+ * personal lab, followed by the clarification rows from `facts.ts` (status,
+ * purpose, release, focus). Row grid and hairlines mirror the harness section.
+ */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="why" class="why">
+  <div class="inner">
+    <Kicker>{t("why.kicker")}</Kicker>
+    <SectionHeading
+      lines={[{ text: t("why.h2a") }, { text: t("why.h2b"), outline: true }]}
+    />
+
+    <div class="prose">
+      <p>{t("why.p1")}</p>
+      <p>{t("why.p2")}</p>
+    </div>
+
+    <div class="rows">
+      {
+        facts.map((fact) => (
+          <div class="row">
+            <span class="label">{fact.label[lang]}</span>
+            <span class="value">{fact.value[lang]}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    padding-inline: var(--pad-x);
+  }
+
+  .inner {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-block: 80px;
+  }
+
+  .why :global(.kicker) {
+    margin-bottom: 16px;
+  }
+
+  .why :global(.heading) {
+    margin-bottom: 24px;
+  }
+
+  .prose {
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+
+  .prose p {
+    margin: 0 0 16px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 28px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: var(--hairline-soft);
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--acc);
+  }
+
+  .value {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

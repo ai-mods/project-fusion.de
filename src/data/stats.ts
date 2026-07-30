@@ -6,7 +6,7 @@ export interface Stat {
   label: LocalizedText;
 }
 
-// Spec §10.5; brand terms (BYOK) are never translated.
+// Spec §10.5. Figures describe the build, not a product offering.
 export const stats: Stat[] = [
   {
     value: "9",
@@ -17,11 +17,11 @@ export const stats: Stat[] = [
     label: { en: "INTEGRATED MODULES", de: "INTEGRIERTE MODULE" },
   },
   {
-    value: "BYOK",
-    label: { en: "BRING YOUR OWN API KEYS", de: "BRING YOUR OWN API KEYS" },
-  },
-  {
     value: "2",
     label: { en: "PLATFORMS: WEB + DESKTOP", de: "PLATTFORMEN: WEB + DESKTOP" },
+  },
+  {
+    value: "1",
+    label: { en: "DEVELOPER · SOLO PROJECT", de: "ENTWICKLER · SOLO-PROJEKT" },
   },
 ];

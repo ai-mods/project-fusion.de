@@ -5,7 +5,7 @@ import Kicker from "./Kicker.astro";
 import Button from "./Button.astro";
 
 /**
- * Above-the-fold hero. Owns the page's only `<h1>` (built locally at 112px —
+ * Above-the-fold hero. Owns the page's only `<h1>` (built locally at 112px,
  * SectionHeading renders `<h2>`) and the 44px grid backdrop from §6.1.
  */
 interface Props {
@@ -29,7 +29,7 @@ const t = useTranslations(lang);
     <div class="row">
       <p class="sub">{t("hero.sub")}</p>
       <div class="actions">
-        <Button href="#modules" variant="filled-light">
+        <Button href="#why" variant="filled-light">
           {t("hero.ctaExplore")}
         </Button>
         <Button href={siteConfig.links.aiMods} variant="outline" external arrow>

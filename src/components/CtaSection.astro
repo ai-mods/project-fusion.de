@@ -5,8 +5,8 @@ import SectionHeading from "./SectionHeading.astro";
 import Button from "./Button.astro";
 
 /**
- * Closing call-to-action (§6.9). The availability line keeps a single source of
- * truth: label text from i18n, the date value from config (§0 D2).
+ * Closing call-to-action (§6.9). The availability line is plain i18n copy since
+ * it dropped the date placeholder (30.07.2026).
  */
 interface Props {
   lang: Lang;
@@ -14,11 +14,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const availability = t("cta.availability").replace(
-  "{value}",
-  siteConfig.availableFrom,
-);
 ---
 
 <section class="cta">
@@ -27,7 +22,10 @@ const availability = t("cta.availability").replace(
       size="cta"
       lines={[{ text: t("cta.h2a") }, { text: t("cta.h2b"), outline: true }]}
     />
-    <p class="sub">{t("cta.sub")}</p>
+    <div class="sub">
+      <p>{t("cta.sub")}</p>
+      <p>{t("cta.ask")}</p>
+    </div>
     <Button
       href={siteConfig.links.aiMods}
       variant="accent-filled"
@@ -36,7 +34,7 @@ const availability = t("cta.availability").replace(
     >
       ai-mods.de
     </Button>
-    <div class="availability">{availability}</div>
+    <div class="availability">{t("cta.availability")}</div>
   </div>
 </section>
 
@@ -56,12 +54,24 @@ const availability = t("cta.availability").replace(
     margin-bottom: 24px;
   }
 
+  /* Wider measure than the other subs (460px) plus a balanced rag: at 460px the
+     centred text read as a narrow column with an orphan word on the last line.
+     Browsers without `balance` fall back to a plain rag. */
   .sub {
     margin: 0 auto 32px;
-    max-width: 460px;
+    max-width: 700px;
+    text-wrap: balance;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-dim);
+  }
+
+  .sub p {
+    margin: 0 0 16px;
+  }
+
+  .sub p:last-child {
+    margin-bottom: 0;
   }
 
   .availability {

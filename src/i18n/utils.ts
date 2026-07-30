@@ -19,7 +19,7 @@ export function otherLang(lang: Lang): Lang {
 }
 
 /**
- * Returns the home route of the given locale — also the prefix for anchor links.
+ * Returns the home route of the given locale, also the prefix for anchor links.
  */
 export function homePath(lang: Lang): string {
   return lang === "en" ? "/" : "/de/";

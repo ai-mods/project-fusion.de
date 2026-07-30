@@ -29,10 +29,10 @@ const otherPath = alternatePath ?? homePath(otherLang(lang));
 
     <div class="right">
       <nav class="nav">
+        <a href={`${homePrefix}#why`}>{t("nav.why")}</a>
         <a href={`${homePrefix}#modules`}>{t("nav.modules")}</a>
         <a href={`${homePrefix}#preview`}>{t("nav.preview")}</a>
         <a href={`${homePrefix}#harness`}>{t("nav.harness")}</a>
-        <a href={`${homePrefix}#roadmap`}>{t("nav.roadmap")}</a>
       </nav>
 
       <Button
@@ -81,10 +81,10 @@ const otherPath = alternatePath ?? homePath(otherLang(lang));
   </div>
 
   <nav id="mobile-menu" class="mobile-menu" hidden>
+    <a href={`${homePrefix}#why`}>{t("nav.why")}</a>
     <a href={`${homePrefix}#modules`}>{t("nav.modules")}</a>
     <a href={`${homePrefix}#preview`}>{t("nav.preview")}</a>
     <a href={`${homePrefix}#harness`}>{t("nav.harness")}</a>
-    <a href={`${homePrefix}#roadmap`}>{t("nav.roadmap")}</a>
     <a
       class="ext"
       href={siteConfig.links.aiMods}

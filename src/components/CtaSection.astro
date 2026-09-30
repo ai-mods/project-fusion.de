@@ -5,8 +5,8 @@ import SectionHeading from "./SectionHeading.astro";
 import Button from "./Button.astro";
 
 /**
- * Closing call-to-action (§6.9). The availability line is plain i18n copy since
- * it dropped the date placeholder (30.07.2026).
+ * Closing call-to-action (§6.9), inviting visitors to reach out for questions
+ * and exchange about the project.
  */
 interface Props {
   lang: Lang;
@@ -34,7 +34,7 @@ const t = useTranslations(lang);
     >
       ai-mods.de
     </Button>
-    <div class="availability">{t("cta.availability")}</div>
+    <div class="tagline">{t("cta.tagline")}</div>
   </div>
 </section>
 
@@ -74,7 +74,7 @@ const t = useTranslations(lang);
     margin-bottom: 0;
   }
 
-  .availability {
+  .tagline {
     margin-top: 20px;
     font-family: var(--font-mono);
     font-weight: 600;

@@ -32,8 +32,8 @@ export const facts: ProjectFact[] = [
   {
     label: { en: "MY FOCUS", de: "MEIN FOKUS" },
     value: {
-      en: "A permanent position as an AI enabler. This project feeds that, it does not compete with it.",
-      de: "Eine Festanstellung als AI Enabler. Dieses Projekt zahlt darauf ein, es konkurriert nicht damit.",
+      en: "My job as Solution Architect for Automations & AI at SKOUZ. Project Fusion stays my lab alongside it.",
+      de: "Mein Job als Solution Architect für Automations & AI bei SKOUZ. Project Fusion bleibt mein Labor daneben.",
     },
   },
 ];
